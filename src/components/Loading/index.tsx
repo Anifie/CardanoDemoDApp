@@ -38,3 +38,4 @@ export const Spinner = React.memo(
     );
   }
 );
+Spinner.displayName = "Spinner";

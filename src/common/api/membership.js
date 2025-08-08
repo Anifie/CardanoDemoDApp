@@ -84,4 +84,17 @@ const getMemberNFTListing = async (params) => {
     return result;
 };
 
-export { memberSignInPost, memberProfilePut, memberMintNFTPost, memberNFTCheckQueue, getMemberNFTListing }
+const discordJoin = async (params) => {
+    let response = await fetch(process.env.BACKEND_API_URL + '/discord/join', {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json',
+            'Authorization': 'Bearer ' + localStorage.getItem("backend_access_token")
+        },
+        body: JSON.stringify(params)
+    })
+    let jsonResult = await response.json()
+    return jsonResult
+}
+
+export { memberSignInPost, memberProfilePut, memberMintNFTPost, memberNFTCheckQueue, getMemberNFTListing, discordJoin }

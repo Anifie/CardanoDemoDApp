@@ -44,15 +44,15 @@ const STEPS = {
 const StepShow = ({ step }) => (
   <div className="flex items-center justify-between mb-6 w-full">
     <div
-      className={`w-[32%] h-1 ${step >= 1 ? "bg-[#CC0000]" : "bg-[#FBE5E8]"
+      className={`w-[32%] h-1 ${step >= 1 ? "bg-[#1976D2]" : "bg-[#FBE5E8]"
         } rounded-lg`}
     ></div>
     <div
-      className={`w-[32%] h-1 ${step >= 2 ? "bg-[#CC0000]" : "bg-[#FBE5E8]"
+      className={`w-[32%] h-1 ${step >= 2 ? "bg-[#1976D2]" : "bg-[#FBE5E8]"
         } rounded-lg`}
     ></div>
     <div
-      className={`w-[32%] h-1 ${step >= 3 ? "bg-[#CC0000]" : "bg-[#FBE5E8]"
+      className={`w-[32%] h-1 ${step >= 3 ? "bg-[#1976D2]" : "bg-[#FBE5E8]"
         } rounded-lg`}
     ></div>
   </div>
@@ -384,6 +384,7 @@ export const BackgroundSection = () => {
     </div>
   )
 }
+const DISCORD_URL = "https://discord.gg/5H48ECt6DG";
 export const OnboardingSection = () => {
 
   const [isAuthLoading, setIsAuthLoading] = React.useState(true);
@@ -532,7 +533,7 @@ export const OnboardingSection = () => {
 
             <AlertDialogTitle className="text-center mb-6">
               <div className="relative w-24 h-24 mx-auto mb-4">
-                <div className="w-20 h-20 bg-[#FBE5E8] rounded-full flex items-center justify-center mx-auto">
+                <div className="w-20 h-20 bg-[#E3F2FD] rounded-full flex items-center justify-center mx-auto">
                   <svg
                     width="41"
                     height="40"
@@ -543,19 +544,19 @@ export const OnboardingSection = () => {
                     <g clipPath="url(#clip0_2737_8464)">
                       <path
                         d="M16.8282 6.07383C16.8282 3.91992 18.5805 2.16758 20.7344 2.16758H22.0863L21.6785 1.03398C21.4492 0.396484 20.8484 0 20.2081 0C20.0307 0 19.8502 0.0304687 19.6738 0.0946875L6.0134 5.06664C5.2013 5.36227 4.78333 6.26094 5.08067 7.07242L5.80247 9.04258H16.8282V6.07383Z"
-                        fill="#DC0017"
+                        fill="#1976D2"
                       />
                       <path
                         d="M20.7344 4.51135C19.8714 4.51135 19.1719 5.21088 19.1719 6.07385V9.0426H32.8438V6.07385C32.8438 5.21088 32.1442 4.51135 31.2812 4.51135H20.7344Z"
-                        fill="#DC0017"
+                        fill="#1976D2"
                       />
                       <path
                         d="M36.9844 31.5817H31.5156C28.2848 31.5817 25.6562 28.9531 25.6562 25.7223C25.6562 22.4914 28.2848 19.8629 31.5156 19.8629H36.9844V14.5114C36.9844 12.7855 35.5852 11.3864 33.8594 11.3864H3.625C1.89914 11.3864 0.5 12.7855 0.5 14.5114V36.875C0.5 38.6009 1.89914 40 3.625 40H33.8594C35.5852 40 36.9844 38.6009 36.9844 36.875V31.5817Z"
-                        fill="#DC0017"
+                        fill="#1976D2"
                       />
                       <path
                         d="M39.3281 22.2067H31.5156C29.5771 22.2067 28 23.7838 28 25.7223C28 27.6608 29.5771 29.2379 31.5156 29.2379H39.3281C39.9743 29.2379 40.5 28.7122 40.5 28.066V23.3785C40.5 22.7324 39.9743 22.2067 39.3281 22.2067ZM31.5156 26.8942C30.8684 26.8942 30.3438 26.3695 30.3438 25.7223C30.3438 25.0751 30.8684 24.5504 31.5156 24.5504C32.1628 24.5504 32.6875 25.0751 32.6875 25.7223C32.6875 26.3695 32.1628 26.8942 31.5156 26.8942Z"
-                        fill="#DC0017"
+                        fill="#1976D2"
                       />
                     </g>
                     <defs>
@@ -572,7 +573,7 @@ export const OnboardingSection = () => {
                 </div>
                 {/* Animated loading circle */}
                 <div className="absolute top-0 left-[10px] w-full h-full">
-                  <div className="w-20 h-20 border-2 border-[#CC0000] rounded-full border-t-transparent animate-spin"></div>
+                  <div className="w-20 h-20 border-2 border-[#1976D2] rounded-full border-t-transparent animate-spin"></div>
                 </div>
               </div>
               <h2 className="text-xl font-bold text-black">
@@ -594,7 +595,7 @@ export const OnboardingSection = () => {
 
             <AlertDialogTitle className="text-center mb-6">
               <div className="relative w-24 h-24 mx-auto mb-4">
-                <div className="w-20 h-20 bg-[#FBE5E8] rounded-full flex items-center justify-center mx-auto">
+                <div className="w-20 h-20 bg-[#E3F2FD] rounded-full flex items-center justify-center mx-auto">
                   <svg
                     width="41"
                     height="41"
@@ -604,40 +605,40 @@ export const OnboardingSection = () => {
                   >
                     <path
                       d="M26.3335 15.5C23.3418 15.5 21.8751 14.0333 21.0918 13.2417C20.7668 12.9167 20.2418 12.9167 19.9168 13.2417C19.1251 14.0333 17.6585 15.5 14.6751 15.5C14.2168 15.5 13.8418 15.875 13.8418 16.3333C13.8418 23.175 14.7918 26.075 20.1335 28.7417C20.2501 28.8 20.3751 28.8333 20.5085 28.8333C20.6418 28.8333 20.7668 28.8 20.8835 28.7417C26.2251 26.0667 27.1751 23.1667 27.1751 16.3333C27.1751 15.875 26.8001 15.5 26.3418 15.5H26.3335ZM22.9085 19.2083L21.2418 22.5417C21.1251 22.7833 20.8918 22.95 20.6335 22.9917C20.5918 22.9917 20.5418 23 20.5001 23C20.2835 23 20.0668 22.9167 19.9085 22.7583L18.2418 21.0917C17.9168 20.7667 17.9168 20.2417 18.2418 19.9167C18.5668 19.5917 19.0918 19.5917 19.4168 19.9167L20.2668 20.7667L21.4168 18.4667C21.6251 18.0583 22.1251 17.8917 22.5335 18.0917C22.9418 18.3 23.1085 18.8 22.9085 19.2083Z"
-                      fill="#DC0017"
+                      fill="#1976D2"
                     />
                     <path
                       d="M24.2085 32.2583L20.8751 30.5917C20.6418 30.475 20.3668 30.475 20.1335 30.5917L16.8001 32.2583C16.5168 32.4 16.3418 32.6916 16.3418 33V35.8167C16.3418 36.45 16.6918 37.025 17.2668 37.3083L20.1418 38.7416C20.2585 38.8 20.3835 38.8333 20.5168 38.8333C20.6501 38.8333 20.7751 38.8 20.8918 38.7416L23.7668 37.3083C24.3335 37.025 24.6918 36.45 24.6918 35.8167V33C24.6918 32.6833 24.5168 32.3917 24.2335 32.2583H24.2085Z"
-                      fill="#DC0017"
+                      fill="#1976D2"
                     />
                     <path
                       d="M38.375 18.0917L35.0416 16.425C34.8083 16.3084 34.5333 16.3084 34.3 16.425L30.9666 18.0917C30.6833 18.2334 30.5083 18.525 30.5083 18.8334V21.65C30.5083 22.2834 30.8583 22.8584 31.4333 23.1417L34.3083 24.575C34.425 24.6334 34.55 24.6667 34.6833 24.6667C34.8166 24.6667 34.9416 24.6334 35.0583 24.575L37.9333 23.1417C38.5 22.8584 38.8583 22.2834 38.8583 21.65V18.8334C38.8583 18.5167 38.6833 18.225 38.4 18.0917H38.375Z"
-                      fill="#DC0017"
+                      fill="#1976D2"
                     />
                     <path
                       d="M9.5748 23.1417C10.1415 22.8584 10.4998 22.2834 10.4998 21.65V18.8334C10.4998 18.5167 10.3248 18.225 10.0415 18.0917L6.70814 16.425C6.4748 16.3084 6.1998 16.3084 5.96647 16.425L2.63314 18.0917C2.3498 18.2334 2.1748 18.525 2.1748 18.8334V21.65C2.1748 22.2834 2.5248 22.8584 3.0998 23.1417L5.9748 24.575C6.09147 24.6334 6.21647 24.6667 6.3498 24.6667C6.48314 24.6667 6.60814 24.6334 6.7248 24.575L9.5998 23.1417H9.5748Z"
-                      fill="#DC0017"
+                      fill="#1976D2"
                     />
                     <path
                       d="M32.7831 15.3167L33.5498 14.9333C33.7914 14.8083 34.0664 14.7417 34.3331 14.7083C32.8164 11.1 29.9331 8.20835 26.3331 6.68335V7.48335C26.3331 7.81668 26.2831 8.15002 26.1831 8.45835C29.1331 9.85835 31.4998 12.3 32.7831 15.3167Z"
-                      fill="#DC0017"
+                      fill="#1976D2"
                     />
                     <path
                       d="M8.2165 15.3167C9.4915 12.3 11.8582 9.85835 14.8165 8.45835C14.7248 8.15002 14.6665 7.82502 14.6665 7.48335V6.68335C11.0665 8.20835 8.18317 11.1 6.6665 14.7083C6.9415 14.7417 7.20817 14.8083 7.44984 14.9333L8.2165 15.3167Z"
-                      fill="#DC0017"
+                      fill="#1976D2"
                     />
                     <path
                       d="M8.2165 25.6833L7.44984 26.0667C7.20817 26.1917 6.93317 26.2584 6.6665 26.2917C8.18317 29.9 11.0665 32.7917 14.6665 34.3167V33C14.6665 32.825 14.6915 32.6584 14.7248 32.5C11.8165 31.0917 9.48317 28.675 8.2165 25.6917V25.6833Z"
-                      fill="#DC0017"
+                      fill="#1976D2"
                     />
                     <path
                       d="M32.7832 25.6833C31.5166 28.6667 29.1832 31.0917 26.2749 32.4917C26.3082 32.6583 26.3332 32.825 26.3332 32.9917V34.3083C29.9332 32.7833 32.8166 29.8917 34.3332 26.2833C34.0582 26.25 33.7916 26.1833 33.5499 26.0583L32.7832 25.675V25.6833Z"
-                      fill="#DC0017"
+                      fill="#1976D2"
                     />
                   </svg>
                 </div>
                 <div className="absolute top-0 left-[10px] w-full h-full">
-                  <div className="w-20 h-20 border-2 border-[#CC0000] rounded-full border-t-transparent animate-spin"></div>
+                  <div className="w-20 h-20 border-2 border-[#1976D2] rounded-full border-t-transparent animate-spin"></div>
                 </div>
               </div>
               <h2 className="text-xl font-bold text-black">
@@ -684,7 +685,7 @@ export const OnboardingSection = () => {
                 setStep(STEPS.NONE);
                 setMintStatus("");
               }}
-              className="w-full bg-[#DC0017] text-white hover:bg-[#B30012]"
+              className="w-full bg-blue-600 text-white hover:bg-blue-700"
             >
               Close
             </Button>
@@ -705,7 +706,7 @@ export const OnboardingSection = () => {
                 href={
                   "https://discord.gg/5H48ECt6DG"
                 }
-                className="inline-block bg-[#DC0017] text-white hover:bg-[#B30012] px-4 py-2 rounded-md mb-4"
+                className="inline-block bg-blue-600 text-white hover:bg-blue-700 px-4 py-2 rounded-md mb-4"
               >
                 Community
               </Link>
@@ -714,33 +715,52 @@ export const OnboardingSection = () => {
         </AlertDialogContent>
       </AlertDialog>
       <AlertDialog open={step == STEPS.NFT_PROCESSING}>
-        <AlertDialogContent className={`p-2 max-w-[350px] lg:max-w-[800px]`}>
+        <AlertDialogContent
+          className={`p-2 max-w-[350px] rounded-lg lg:max-w-[800px]`}
+        >
           <AlertDialogHeader>
             <StepShow step={3} />
             <AlertDialogTitle className="text-center mb-6">
               <h2 className="text-xl font-bold text-black">
-                NFT Processing...
+                Congratulations! Your NFT is on the way!
               </h2>
             </AlertDialogTitle>
-            <AlertDialogDescription className="text-center text-gray-600 pb-8">
-              <div className="mb-4">
-                <p className="mb-3">
-                  Your NFT is being minted. This process may take a few minutes. <br />
-                  In the meantime, join our Discord community for a Special Gift!
-                </p>
+            <AlertDialogDescription className="text-center">
+              <div className="relative pl-3 mb-4">
+                <div className="relative">
+                  <div className="relative">
+                    <p className="text-center mb-4 text-lg">
+                      Membership NFT will take some time to be minted. Meanwhile, you can join our community to get more information about the project and receive exclusive offers.
+                    </p>
+                  </div>
+                </div>
+                <div className="flex items-center justify-center">
+                  <img src="/discord-logo.png"></img>
+                </div>
+              </div>
+              <div className="flex flex-col gap-4 text-xl">
                 <Link
-                  href="https://discord.gg/5H48ECt6DG"
-                  className="inline-block bg-[#DC0017] text-white hover:bg-[#B30012] px-4 py-2 rounded-md"
+                  href={DISCORD_URL}
                   target="_blank"
-                  rel="noopener noreferrer"
+                  className="w-full py-3 px-6 bg-blue-600 text-white rounded-lg font-medium hover:bg-blue-700 transition-colors text-center"
                 >
-                  Join Discord Community
+                  Join Community
+                </Link>
+
+
+                <Link
+                  href="/my-nft"
+                  target="_blank"
+                  className="w-full py-3 px-6 text-[#1a1a1a] font-medium hover:text-blue-600 transition-colors text-center"
+                >
+                  Check My NFT
                 </Link>
               </div>
             </AlertDialogDescription>
           </AlertDialogHeader>
         </AlertDialogContent>
       </AlertDialog>
+
     </>
   );
 };

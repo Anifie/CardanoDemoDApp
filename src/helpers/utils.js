@@ -9,7 +9,7 @@ export function cn(...inputs) {
 export const usePageTitle = (title) => {
     React.useEffect(() => {
         if (title) document.querySelector("title").innerHTML = title;
-    }, []);
+    }, [title]);
 };
 
 export const patchWeb3Auth = async (title, subtitle, policy) => {

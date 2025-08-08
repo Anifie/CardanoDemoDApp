@@ -1,8 +1,8 @@
 'use client';
 import Image from "next/image";
 // import ChatWindow from "../modules/chat/components";
-import { useWeb3Auth } from "../common/service/useWeb3Auth";
-import { useMembership } from "../common/service/useMembership";
+import { useWeb3Auth } from "@app/common/service/useWeb3Auth";
+import { useMembership } from "@app/common/service/useMembership";
 import { useEffect, useState } from "react";
 import { useForm } from "react-hook-form";
 import { Asset, deserializeAddress, mConStr0 } from "@meshsdk/core";
@@ -33,12 +33,12 @@ import { NativeScript } from "@meshsdk/common"
 
 import mesh from "@meshsdk/core";
 
-import {ulid} from 'ulid';
+import { ulid } from 'ulid';
 
-import {MeshPlutusNFTContract} from "@meshsdk/contract"
+import { MeshPlutusNFTContract } from "@meshsdk/contract"
 
 export default function Home() {
-  
+
   const [metadata, setMetadata] = useState()
   const [mintNFTForgeOneSignatureLoading, setMintNFTForgeOneSignatureLoading] = useState(false)
   const [mintNFTForgeOneSignatureTxHash, setMintNFTForgeOneSignatureTxHash] = useState()
@@ -72,13 +72,13 @@ export default function Home() {
 
   const { isSignedIn, isFirstTimeSignIn, memberProfile, memberSignIn } = useMembership();
 
-  const {register, formState: {errors}, handleSubmit} = useForm()
+  const { register, formState: { errors }, handleSubmit } = useForm()
 
   useEffect(() => {
     console.log("isLoggedIn", isLoggedIn)
-    if(isLoggedIn) {  // logged in to web3auth
+    if (isLoggedIn) {  // logged in to web3auth
 
-      if(!idToken || !appPubKey) {
+      if (!idToken || !appPubKey) {
         getUserInfo() // sometime user refresh, so we need to get idToken and appPubKey again and put into the state
         getAccounts()
       }
@@ -101,13 +101,13 @@ export default function Home() {
   };
 
   const mintNFTWithForgeScriptOneSignature = async () => {
-    
+
     setMintNFTForgeOneSignatureLoading(true)
     setMintNFTForgeOneSignatureTxHash()
 
     let _metadata = metadata ? JSON.parse(metadata) : sampleMetadata;
     console.log("_metadata", _metadata);
-    
+
     let asset = {
       assetName: _metadata.name,
       assetQuantity: '1',
@@ -130,7 +130,7 @@ export default function Home() {
     const txHash = await cardanoWallet.submitTx(signedTx);
     const response = await waitForTx(txHash)
     console.log("response", response);
-    
+
     setMintNFTForgeOneSignatureTxHash(txHash)
     setMintNFTForgeOneSignatureLoading(false)
   }
@@ -141,13 +141,13 @@ export default function Home() {
     let _assets = await cardanoWallet.getAssets();
     setNFTs(_assets);
     console.log("_assets", _assets);
-    
+
     setGetNFTLoading(false)
   }
 
   const burnNFT = async () => {
 
-    if(!burnNFTUnit)  {
+    if (!burnNFTUnit) {
       alert('Missing burn NFT Unit')
       return;
     }
@@ -180,11 +180,11 @@ export default function Home() {
   }
 
   const transferNFT = async () => {
-    if(!transferNFTUnit)  {
+    if (!transferNFTUnit) {
       alert('Missing transfer NFT Unit')
       return;
     }
-    if(!transferDestinationAddress)  {
+    if (!transferDestinationAddress) {
       alert('Missing transfer destination address')
       return;
     }
@@ -199,7 +199,7 @@ export default function Home() {
         { unit: "lovelace", quantity: "2000000" } // Include some ADA as gas fee
       ])
       .setChangeAddress(await cardanoWallet.getChangeAddress()); // Set change address
-    
+
     // Complete, sign, and submit the transaction
     const unsignedTx = await tx.build();
     const signedTx = await cardanoWallet.signTx(unsignedTx);
@@ -213,10 +213,10 @@ export default function Home() {
   const setCollateral = async () => {
     const utxos = await cardanoWallet.getUtxos();
     console.log("utxos", utxos);
-    
-    const collateralUtxo = utxos.find(utxo => utxo.output.amount.find(x => x.quantity >= 5000000) ); // 5 ADA
+
+    const collateralUtxo = utxos.find(utxo => utxo.output.amount.find(x => x.quantity >= 5000000)); // 5 ADA
     console.log("collateralUtxo", collateralUtxo);
-    
+
     if (!collateralUtxo) {
       console.log("No UTXO with sufficient ADA for collateral.");
       alert("No UTXO with sufficient ADA for collateral. Please top up your wallet with at least 5 ADA, i.e. 5 millions lovelace")
@@ -239,18 +239,18 @@ export default function Home() {
     });
 
     const contract = new MeshPlutusNFTContract({
-                                                  mesh: meshTxBuilder,
-                                                  fetcher: blockchainProvider,
-                                                  wallet: cardanoWallet,
-                                                  networkId: 0
-                                                }, {
-                                                  collectionNme: oracleCollectionName
-                                                });
+      mesh: meshTxBuilder,
+      fetcher: blockchainProvider,
+      wallet: cardanoWallet,
+      networkId: 0
+    }, {
+      collectionNme: oracleCollectionName
+    });
 
-    const {tx, paramUtxo} = await contract.setupOracle(oracelNFTPrice);
+    const { tx, paramUtxo } = await contract.setupOracle(oracelNFTPrice);
     console.log("tx", tx);
     console.log("paramUtxo", paramUtxo);
-    
+
     const signedTx = await cardanoWallet.signTx(tx);
     const txHash = await cardanoWallet.submitTx(signedTx);
     setOracleMintTxHash(txHash)
@@ -260,22 +260,22 @@ export default function Home() {
 
   const mintNFTPlutus = async () => {
 
-    if(!oracleCollectionName) {
+    if (!oracleCollectionName) {
       alert("collection name is required");
       return
     }
     else {
       console.log(oracleCollectionName);
-      
+
     }
 
-    if(!oracleMintParamUtxo) {
+    if (!oracleMintParamUtxo) {
       alert("Param Utxo is required");
       return
     }
     else {
       console.log("oracleMintParamUtxo", JSON.parse(oracleMintParamUtxo));
-      
+
     }
 
 
@@ -286,7 +286,7 @@ export default function Home() {
       submitter: blockchainProvider,
       verbose: true,
     });
-    
+
     const contract = new MeshPlutusNFTContract(
       {
         mesh: meshTxBuilder,
@@ -299,13 +299,13 @@ export default function Home() {
         paramUtxo: JSON.parse(oracleMintParamUtxo),
       },
     );
-    
+
     // meshjs code is buggy, so manually set the auto-incremental value
     // // Get Oracle Data
     // const oracleData = await contract.getOracleData(); // see getOracleData()
     // console.log("oracleData", oracleData);
-    
-    
+
+
     // define your NFT metadata here
     const assetMetadata = {
       ...sampleMetadata,
@@ -314,7 +314,7 @@ export default function Home() {
     };
 
     setNFTMetadata(assetMetadata)
-    
+
     const tx = await contract.mintPlutusNFT(assetMetadata);
     const signedTx = await cardanoWallet.signTx(tx);
     const txHash = await cardanoWallet.submitTx(signedTx);
@@ -328,7 +328,7 @@ export default function Home() {
 
     let _metadata = metadata ? JSON.parse(metadata) : sampleMetadata;
     console.log("_metadata", _metadata);
-    
+
     let asset = {
       assetName: _metadata.name,
       assetQuantity: '1',
@@ -341,7 +341,7 @@ export default function Home() {
       type: "sig",
       keyHash: cardanoPublicKeyHash
     }
-    
+
     const forgingScript = ForgeScript.fromNativeScript(nativeScript);
 
     const _hash = resolveNativeScriptHash(nativeScript);
@@ -359,7 +359,7 @@ export default function Home() {
     const txHash = await cardanoWallet.submitTx(signedTx);
     const response = await waitForTx(txHash)
     console.log("response", response);
-    
+
     setMintNativeTxHash(txHash)
     setMintNativeLoading(false)
   }
@@ -370,7 +370,7 @@ export default function Home() {
 
   // const mintWithHelios = async () => {
   //   console.log("mintWithHelios");
-    
+
   //   setMintNFTHeliosLoading(true)
   //   setMintNFTHeliosTxHash()
 
@@ -387,7 +387,7 @@ export default function Home() {
 
   //   const tx = new Transaction({ initiator: cardanoWallet });
   //   console.log(11);
-    
+
   //   tx.mintAsset(
   //     plutusScript,
   //     {
@@ -400,7 +400,7 @@ export default function Home() {
   //       metadata: _metadata,
   //       label: '721',
   //       recipient: cardanoWalletAddress
-        
+
   //     },
   //     { data: mesh.Data.to("Mint") } // Pass the redeemer as a separate third argument
   //   );
@@ -411,119 +411,119 @@ export default function Home() {
   //   const txHash = await cardanoWallet.submitTx(signedTx);
   //   const response = await waitForTx(txHash)
   //   console.log("response", response);
-    
+
   //   setMintNFTHeliosTxHash(txHash)
   //   setMintNFTHeliosLoading(false)
   // }
 
   // const burnWithHelios = async () => {
-    
+
   // }
 
   // const transferWithHelios = async () => {
-    
+
   // }
-  
+
   return (
     <div className="grid grid-rows-[20px_1fr_20px] items-center justify-items-center min-h-screen p-8 pb-20 gap-16 sm:p-20 font-[family-name:var(--font-geist-sans)]">
       <main className="flex flex-col gap-8 row-start-2 items-center sm:items-start">
         <div className="text-[40px] underline">Cardano dApp with web3auth and NextJs</div>
         {
           isLoggedIn
-          ? <>
+            ? <>
               Logged In
-              <br/>
+              <br />
               <button onClick={logout} className="btn btn-secondary">
                 Logout
               </button>
-              <div style={{marginBottom: 2}}>Web3Auth IdToken: {idToken}</div>
-              <div style={{marginBottom: 2}}>Web3Auth appPubKey: <br/> {appPubKey}</div>
+              <div style={{ marginBottom: 2 }}>Web3Auth IdToken: {idToken}</div>
+              <div style={{ marginBottom: 2 }}>Web3Auth appPubKey: <br /> {appPubKey}</div>
               {/* <>Polygon wallet address: <br/> {walletAddress}</>
               <br/> */}
-              <div style={{marginBottom: 2}}>Cardano wallet address (Testnet): <br/> {cardanoWalletAddress}</div>
-              <div style={{marginBottom: 2}}>Cardano public key hash (Testnet): <br/> {cardanoPublicKeyHash}</div>
+              <div style={{ marginBottom: 2 }}>Cardano wallet address (Testnet): <br /> {cardanoWalletAddress}</div>
+              <div style={{ marginBottom: 2 }}>Cardano public key hash (Testnet): <br /> {cardanoPublicKeyHash}</div>
               <div>
                 Wallet Balance: {cardanoWalletBalance} lovelace
-                <span style={{marginLeft: 10}}><button className="btn btn-sm btn-primary" onClick={getCardanoBalance}>Refresh</button></span>
-                <span style={{marginLeft: 10}} className="text-sm">(Please get free Preview ADA from <a href="https://docs.cardano.org/cardano-testnets/tools/faucet" className="link">Cardano Faucet</a>)</span>
+                <span style={{ marginLeft: 10 }}><button className="btn btn-sm btn-primary" onClick={getCardanoBalance}>Refresh</button></span>
+                <span style={{ marginLeft: 10 }} className="text-sm">(Please get free Preview ADA from <a href="https://docs.cardano.org/cardano-testnets/tools/faucet" className="link">Cardano Faucet</a>)</span>
               </div>
-              <div style={{marginLeft: 10}} className="flex flex-col">
+              <div style={{ marginLeft: 10 }} className="flex flex-col">
                 <div className="flex flex-col">
                   <label>Asset Metadata</label>
                   <textarea onChange={(e) => setMetadata(e.target.value)} rows={6} className="w-[800px]" value={JSON.stringify(sampleMetadata, null, 2)} />
                 </div>
                 <div className="flex flex-col ml-2">
                   <label>&nbsp;</label>
-                  <button className="btn btn-primary" 
+                  <button className="btn btn-primary"
                     disabled={mintNFTForgeOneSignatureLoading}
                     onClick={async () => await mintNFTWithForgeScriptOneSignature()}>
-                      {
-                       mintNFTForgeOneSignatureLoading
-                       ?   <span className="flex justify-center">Loading.. <FontAwesomeIcon icon={faSpinner} className="h-4 w-4 animate-spin"/></span>
-                       :   <span>Mint Asset - with ForgeScript One Signature</span> 
-                      }
+                    {
+                      mintNFTForgeOneSignatureLoading
+                        ? <span className="flex justify-center">Loading.. <FontAwesomeIcon icon={faSpinner} className="h-4 w-4 animate-spin" /></span>
+                        : <span>Mint Asset - with ForgeScript One Signature</span>
+                    }
                   </button>
                 </div>
                 {
-                  mintNFTForgeOneSignatureTxHash && 
+                  mintNFTForgeOneSignatureTxHash &&
                   <div className="flex items-center">
-                    Transaction Hash: 
+                    Transaction Hash:
                     <a target="_blank" href={`https://preview.cardanoscan.io/transaction/${mintNFTForgeOneSignatureTxHash}`} className="ml-2 link">{mintNFTForgeOneSignatureTxHash}</a>
                     <span className="ml-2 text-xs">(Please wait 1 or 2 minute(s) before click on this link, cardanoscan will take some time)</span>
                   </div>
                 }
               </div>
               <div className="flex flex-col ml-2 mt-10">
-                <button className="btn btn-primary" 
+                <button className="btn btn-primary"
                   disabled={getNFTLoading}
                   onClick={async () => await getNFTs()}>
-                    {
+                  {
                     getNFTLoading
-                    ?   <span className="flex justify-center">Loading.. <FontAwesomeIcon icon={faSpinner} className="h-4 w-4 animate-spin"/></span>
-                    :   <span>Get My Assets</span> 
-                    }
+                      ? <span className="flex justify-center">Loading.. <FontAwesomeIcon icon={faSpinner} className="h-4 w-4 animate-spin" /></span>
+                      : <span>Get My Assets</span>
+                  }
                 </button>
                 {
-                  NFTs && 
+                  NFTs &&
                   <textarea rows={6} className="w-[800px]" disabled={true} value={JSON.stringify(NFTs, null, 2)} />
                 }
               </div>
               <div className="flex flex-col ml-2 mt-10">
-                <input type="text" className="input" name="txtBurnNFTUnit" placeholder="Asset Unit" onChange={(e) => setBurnNFTUnit(e.target.value)}/>
-                <button className="btn btn-primary mt-1" 
+                <input type="text" className="input" name="txtBurnNFTUnit" placeholder="Asset Unit" onChange={(e) => setBurnNFTUnit(e.target.value)} />
+                <button className="btn btn-primary mt-1"
                   disabled={burnNFTLoading}
                   onClick={async () => await burnNFT()}>
-                    {
+                  {
                     burnNFTLoading
-                    ?   <span className="flex justify-center">Loading.. <FontAwesomeIcon icon={faSpinner} className="h-4 w-4 animate-spin"/></span>
-                    :   <span>Burn Asset</span> 
-                    }
+                      ? <span className="flex justify-center">Loading.. <FontAwesomeIcon icon={faSpinner} className="h-4 w-4 animate-spin" /></span>
+                      : <span>Burn Asset</span>
+                  }
                 </button>
                 {
                   burnNFTTxHash &&
                   <div className="flex items-center">
-                    Transaction Hash: 
+                    Transaction Hash:
                     <a target="_blank" href={`https://preview.cardanoscan.io/transaction/${burnNFTTxHash}`} className="ml-2 link">{burnNFTTxHash}</a>
                     <span className="ml-2 text-xs">(Please wait 1 or 2 minute(s) before click on this link, cardanoscan will take some time)</span>
                   </div>
                 }
               </div>
               <div className="flex flex-col ml-2 mt-10">
-                <input type="text" className="input" name="txtTransferNFTUnit" placeholder="Asset Unit" onChange={(e) => setTransferNFTUnit(e.target.value)}/>
-                <input type="text" className="input mt-1" name="txtTransferDestinationAddress" placeholder="Receiver Address" onChange={(e) => setTransferDestinationAddress(e.target.value)}/>
-                <button className="btn btn-primary mt-1" 
+                <input type="text" className="input" name="txtTransferNFTUnit" placeholder="Asset Unit" onChange={(e) => setTransferNFTUnit(e.target.value)} />
+                <input type="text" className="input mt-1" name="txtTransferDestinationAddress" placeholder="Receiver Address" onChange={(e) => setTransferDestinationAddress(e.target.value)} />
+                <button className="btn btn-primary mt-1"
                   disabled={transferNFTLoading}
                   onClick={async () => await transferNFT()}>
-                    {
+                  {
                     transferNFTLoading
-                    ?   <span className="flex justify-center">Loading.. <FontAwesomeIcon icon={faSpinner} className="h-4 w-4 animate-spin"/></span>
-                    :   <span>Transfer Asset</span> 
-                    }
+                      ? <span className="flex justify-center">Loading.. <FontAwesomeIcon icon={faSpinner} className="h-4 w-4 animate-spin" /></span>
+                      : <span>Transfer Asset</span>
+                  }
                 </button>
                 {
                   transferNFTTxHash &&
                   <div className="flex items-center">
-                    Transaction Hash: 
+                    Transaction Hash:
                     <a target="_blank" href={`https://preview.cardanoscan.io/transaction/${transferNFTTxHash}`} className="ml-2 link">{transferNFTTxHash}</a>
                     <span className="ml-2 text-xs">(Please wait 1 or 2 minute(s) before click on this link, cardanoscan will take some time)</span>
                   </div>
@@ -587,19 +587,19 @@ export default function Home() {
                   </>
                 }
               </div> */}
-              
+
               <div className="border p-4">
                 <span>Mint owneable asset with NativeScript</span>
                 <div className="border p-2">
-                  <button className="btn btn-primary" onClick={async() => await mintNative()}>
+                  <button className="btn btn-primary" onClick={async () => await mintNative()}>
                     {
                       mintNativeLoading
-                      ?   <span className="flex justify-center">Loading.. <FontAwesomeIcon icon={faSpinner} className="h-4 w-4 animate-spin"/></span>
-                      :   <span>Mint with Native Script</span> 
+                        ? <span className="flex justify-center">Loading.. <FontAwesomeIcon icon={faSpinner} className="h-4 w-4 animate-spin" /></span>
+                        : <span>Mint with Native Script</span>
                     }
                   </button>
                   {
-                    nativeScriptPolicyId && 
+                    nativeScriptPolicyId &&
                     <div>
                       <>Policy Id (this policy belong to your wallet) : </> {nativeScriptPolicyId}
                     </div>
@@ -607,19 +607,19 @@ export default function Home() {
                   {
                     mintNativeTxHash &&
                     <>
-                    <div className="flex items-center">
-                      Transaction Hash: 
-                      <a target="_blank" href={`https://preview.cardanoscan.io/transaction/${mintNativeTxHash}`} className="ml-2 link">{mintNativeTxHash}</a>
+                      <div className="flex items-center">
+                        Transaction Hash:
+                        <a target="_blank" href={`https://preview.cardanoscan.io/transaction/${mintNativeTxHash}`} className="ml-2 link">{mintNativeTxHash}</a>
 
-                      <span className="ml-2 text-xs">(Please wait 1 or 2 minute(s) before click on this link, cardanoscan will take some time)</span>
-                    </div>
+                        <span className="ml-2 text-xs">(Please wait 1 or 2 minute(s) before click on this link, cardanoscan will take some time)</span>
+                      </div>
                     </>
                   }
                 </div>
 
-              </div>  
+              </div>
             </>
-          : <button onClick={login} className="btn btn-primary">
+            : <button onClick={login} className="btn btn-primary">
               Login
             </button>
         }

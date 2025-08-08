@@ -44,7 +44,7 @@ import { applyParamsToScript } from "@meshsdk/core-cst";
 
 import blueprint from '../blueprint/plutus.json';
 
-const BLOCKFROST_PROJECT_ID = process.env.NEXT_PUBLIC_BLOCKFROST_PROJECT_ID;
+const BLOCKFROST_PROJECT_ID = process.env.BLOCKFROST_PROJECT_ID;
 console.log("BLOCKFROST_PROJECT_ID", BLOCKFROST_PROJECT_ID);
 
 if (!BLOCKFROST_PROJECT_ID)
