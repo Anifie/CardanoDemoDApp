@@ -1,7 +1,7 @@
 'use client';
 
 import { createContext, FunctionComponent, ReactNode, useCallback, useContext, useEffect, useState } from "react";
-import { memberSignInPost, memberProfilePut, memberMintNFTPost, memberNFTCheckQueue, getMemberNFTListing } from '../api/membership'
+import { memberSignInPost, memberProfilePut, memberMintNFTPost, memberNFTCheckQueue, getMemberNFTListing, discordJoin } from '../api/membership'
 import { useWeb3Auth } from "./useWeb3Auth";
 
 export const MembershipContext = createContext({
@@ -13,6 +13,7 @@ export const MembershipContext = createContext({
   mintMembershipNFT: async () => false,
   nftCheckQueue: async () => { return { code: 1, success: false, msg: "", data: [] } },
   getMyNFT: async () => { return { code: 1, success: false, msg: "", data: [] } },
+  discordLinkWallet: async (guid) => { return { code: 1, success: false, msg: "" } },
 });
 
 export function useMembership() {
@@ -101,6 +102,22 @@ export const MembershipProvider = ({ children }) => {
       return { code: 1, success: false, msg: "Cannot get my NFT", data: [] };
     }
   }
+
+  const discordLinkWallet = async (guid) => {
+    try {
+      let result = await discordJoin({ appPubKey: appPubKey, interactionId: guid })
+      console.log("discordLinkWallet", result);
+      if (result.Success) {
+        return { code: 0, success: true, msg: result.Message, data: [] };
+      }
+      else {
+        return { code: 1, success: false, msg: result.Message, data: [] };
+      }
+    } catch (err) {
+      console.error("Cannot link discord wallet", err);
+      return { code: 1, success: false, msg: "Cannot link discord wallet", data: [] };
+    }
+  }
   const contextProvider = {
     isSignedIn,
     isFirstTimeSignIn,
@@ -110,6 +127,7 @@ export const MembershipProvider = ({ children }) => {
     mintMembershipNFT,
     nftCheckQueue,
     getMyNFT,
+    discordLinkWallet,
   };
 
   return <MembershipContext.Provider value={contextProvider}>

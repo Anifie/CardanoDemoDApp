@@ -15,7 +15,7 @@ export function NavigationEvents({
     const url = `${pathname}?${searchParams}`;
     console.log(url);
     callback(url, { pathname, searchParams });
-  }, [pathname, searchParams]);
+  }, [pathname, searchParams, callback]);
 
   return null;
 }
