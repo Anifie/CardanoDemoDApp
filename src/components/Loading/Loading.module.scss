@@ -1,0 +1,28 @@
+.tv-spinner {
+  display: inline-block;
+  width: 1em;
+  height: 1em;
+  transform: translateZ(0) scale(1);
+  backface-visibility: hidden;
+  transform-origin: 0 0;
+  div {
+    position: absolute;
+    width: 0.75em;
+    height: 0.75em;
+    border: 0.1em solid var(--arc-spinner-color);
+    border-top-color: transparent;
+    border-radius: 50%;
+    animation: tv-spinner-kf 1s linear infinite;
+    top: 46%;
+    left: 46%;
+    box-sizing: content-box;
+  }
+}
+@keyframes tv-spinner-kf {
+  0% {
+    transform: translate(-50%, -50%) rotate(0deg);
+  }
+  100% {
+    transform: translate(-50%, -50%) rotate(360deg);
+  }
+}
