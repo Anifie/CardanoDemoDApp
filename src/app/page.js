@@ -2,7 +2,7 @@
 import { useWeb3Auth } from "../common/service/useWeb3Auth";
 import { useMembership } from "../common/service/useMembership";
 import { useEffect } from "react";
-import { OnboardingSection } from "@app/components/page-components";
+import { OnboardingSection } from "../components/page-components";
 
 export default function Home() {
   return (

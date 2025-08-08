@@ -129,6 +129,7 @@ export const Web3AuthContext = createContext({
   appPubKey: null,
   walletAddress: null,
   cardanoPublicKeyHash: null,
+  cardanoWalletAddress: null,
   blockchainProvider: null,
   login: async () => { },
   logout: async () => { },

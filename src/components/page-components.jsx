@@ -1,8 +1,5 @@
 "use client";
 
-
-import { logger } from "@app/helpers/logger";
-
 import Link from "next/link";
 
 import React, { Component, useEffect } from "react";
@@ -17,7 +14,7 @@ import {
   AlertDialogHeader,
   AlertDialogTitle,
   AlertDialogTrigger,
-} from "@app/components/ui/alert-dialog";
+} from "./ui/alert-dialog";
 import {
   Dialog,
   DialogClose,
@@ -27,13 +24,13 @@ import {
   DialogTitle,
   DialogFooter,
   DialogTrigger,
-} from "@app/components/ui/dialog";
-import { Button } from "@app/components/ui/button";
+} from "./ui/dialog";
+import { Button } from "./ui/button";
 
-import { getMobileOS } from "@app/helpers/mobile";
+import { getMobileOS } from "../helpers/mobile";
 import { Spinner } from "./Loading";
-import { useWeb3Auth } from "@app/common/service/useWeb3Auth";
-import { useMembership } from "@app/common/service/useMembership";
+import { useWeb3Auth } from "../common/service/useWeb3Auth";
+import { useMembership } from "../common/service/useMembership";
 
 const STEPS = {
   CREATING_WALLET: 2,
@@ -403,7 +400,7 @@ export const OnboardingSection = () => {
   const [step, setStep] = React.useState(STEPS.NONE);
   const [qrId, setQrId] = React.useState("");
   const [os, setOS] = React.useState("");
-  const { isLoggedIn, login, logout, getUserInfo, getAccounts, idToken, appPubKey, walletAddress } = useWeb3Auth();
+  const { isLoggedIn, login, logout, getUserInfo, getAccounts, idToken, appPubKey, cardanoWalletAddress } = useWeb3Auth();
   const { isSignedIn, isFirstTimeSignIn, memberProfile, memberSignIn, mintMembershipNFT, nftCheckQueue } = useMembership();
   useEffect(() => {
     if (isLoggedIn) {
@@ -451,7 +448,7 @@ export const OnboardingSection = () => {
     } else {
       setStep(STEPS.CREATING_WALLET);
       if (!isSignedIn) {
-        memberSignIn(walletAddress)
+        memberSignIn(cardanoWalletAddress)
       } else {
         setStep(STEPS.REQUESTING_NFT);
         startMinting();

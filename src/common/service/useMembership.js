@@ -24,7 +24,7 @@ export const MembershipProvider = ({ children }) => {
   const [isFirstTimeSignIn, setIsFirstTimeSignIn] = useState(null);
   const [memberProfile, setMemberProfile] = useState(null);
 
-  const { appPubKey, walletAddress } = useWeb3Auth();
+  const { appPubKey, cardanoWalletAddress } = useWeb3Auth();
 
   const memberSignIn = async (walletAddress) => {
     console.log("memberSignIn", walletAddress)
@@ -88,7 +88,7 @@ export const MembershipProvider = ({ children }) => {
         pageSize: 100,
         sortBy: "NEWLY_CREATED",
         status: "NOTFORSALE",
-        walletAddress: walletAddress,
+        walletAddress: cardanoWalletAddress,
       })
       if (result.success) {
         return result.data;

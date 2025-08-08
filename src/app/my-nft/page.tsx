@@ -11,7 +11,7 @@ const MyNFTPage = () => {
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState<string | null>(null);
 
-    const { isLoggedIn, login, logout, getUserInfo, getAccounts, idToken, appPubKey, walletAddress } = useWeb3Auth();
+    const { isLoggedIn, login, logout, getUserInfo, getAccounts, idToken, appPubKey, cardanoWalletAddress } = useWeb3Auth();
     // const { isSignedIn, isFirstTimeSignIn, memberProfile, memberSignIn, mintMembershipNFT, nftCheckQueue } = useMembership();
     useEffect(() => {
         if (isLoggedIn) {
@@ -42,10 +42,10 @@ const MyNFTPage = () => {
                 setLoading(false);
             }
         };
-        if (walletAddress) {
+        if (cardanoWalletAddress) {
             fetchNFTs();
         }
-    }, [walletAddress]);
+    }, [cardanoWalletAddress]);
 
     return (
         <div className="relative min-h-screen bg-gradient-to-br from-[#0a0f2c] via-[#1e2746] to-[#0a2e3b]">
