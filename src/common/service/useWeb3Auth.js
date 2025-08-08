@@ -16,7 +16,7 @@ import { ethers } from "ethers";
 import { mnemonicToEntropy, entropyToMnemonic, mnemonicToSeedSync } from "bip39";
 // import { Bip32PrivateKey, BaseAddress, NetworkInfo, StakeCredential } from "@emurgo/cardano-serialization-lib-browser";
 
-import { 
+import {
   BlockfrostProvider,
   MeshTxBuilder,
   MeshWallet,
@@ -25,28 +25,29 @@ import {
   resolvePlutusScriptAddress,
   resolvePaymentKeyHash,
   // toHex,
-  UTxO} from '@meshsdk/core';
+  UTxO
+} from '@meshsdk/core';
 
-  // import {
-  //   // applyDoubleCborEncoding,
-  //   // applyParamsToScript,
-  //   // Constr,
-  //   // fromText,
-  //   // validatorToAddress,
-  //   // validatorToScriptHash,
-  //   // type MintingPolicy,
-  //   // type OutRef,
-  //   // type SpendingValidator,
-  // } from "@lucid-evolution/lucid";
+// import {
+//   // applyDoubleCborEncoding,
+//   // applyParamsToScript,
+//   // Constr,
+//   // fromText,
+//   // validatorToAddress,
+//   // validatorToScriptHash,
+//   // type MintingPolicy,
+//   // type OutRef,
+//   // type SpendingValidator,
+// } from "@lucid-evolution/lucid";
 
 import { applyParamsToScript } from "@meshsdk/core-cst";
 
 import blueprint from '../blueprint/plutus.json';
 
-const BLOCKFROST_PROJECT_ID = process.env.BLOCKFROST_PROJECT_ID;
+const BLOCKFROST_PROJECT_ID = process.env.NEXT_PUBLIC_BLOCKFROST_PROJECT_ID;
 console.log("BLOCKFROST_PROJECT_ID", BLOCKFROST_PROJECT_ID);
 
-if(!BLOCKFROST_PROJECT_ID)
+if (!BLOCKFROST_PROJECT_ID)
   throw new Error("Missing BLOCKFROST_PROJECT_ID in .env file")
 
 const blockchainProvider = new BlockfrostProvider(BLOCKFROST_PROJECT_ID);
@@ -84,13 +85,13 @@ const adapter = new AuthAdapter({
     network: WEB3AUTH_NETWORK.SAPPHIRE_MAINNET,    //web3AuthNetwork,
     clientId,
     loginConfig: {
-        mfaLevel: "optional"
-    //   facebook: {
-    //     name: "Custom Auth Login",
-    //     verifier: "facebook", // Please create a verifier on the developer dashboard and pass the name here
-    //     typeOfLogin: "facebook", // Pass on the login provider of the verifier you've created
-    //     showOnModal: false,
-    //   },
+      mfaLevel: "optional"
+      //   facebook: {
+      //     name: "Custom Auth Login",
+      //     verifier: "facebook", // Please create a verifier on the developer dashboard and pass the name here
+      //     typeOfLogin: "facebook", // Pass on the login provider of the verifier you've created
+      //     showOnModal: false,
+      //   },
     },
   },
 });
@@ -129,20 +130,20 @@ export const Web3AuthContext = createContext({
   walletAddress: null,
   cardanoPublicKeyHash: null,
   blockchainProvider: null,
-  login: async () => {},
-  logout: async () => {},
-  getUserInfo: async () => {},
-  signMessage: async () => {},
-  getAccounts: async () => {},
-  getBalance: async () => {},
-  sendTransaction: async () => {},
-  getCardanoBalance: async () => {},
-  getGiftCardScript: async () => {},
-  getTxBuilder: async () => {},
-  getUtxoByTxHash: async () => {},
-  applyParams: async () => {},
-  readValidators: async () => {},
-  waitForTx: async () => {},
+  login: async () => { },
+  logout: async () => { },
+  getUserInfo: async () => { },
+  signMessage: async () => { },
+  getAccounts: async () => { },
+  getBalance: async () => { },
+  sendTransaction: async () => { },
+  getCardanoBalance: async () => { },
+  getGiftCardScript: async () => { },
+  getTxBuilder: async () => { },
+  getUtxoByTxHash: async () => { },
+  applyParams: async () => { },
+  readValidators: async () => { },
+  waitForTx: async () => { },
   // signAndSendTransaction: async () => {},
 });
 
@@ -193,7 +194,7 @@ export const Web3AuthProvider = ({ children, web3AuthNetwork, chain }) => {
   }, []);
 
   useEffect(() => {
-    if(appPubKey) {
+    if (appPubKey) {
       getAccounts();
     }
   }, [appPubKey])
@@ -234,7 +235,7 @@ export const Web3AuthProvider = ({ children, web3AuthNetwork, chain }) => {
       return;
     }
     const user = await web3auth.getUserInfo();
-    console.log("getUserInfo", user); 
+    console.log("getUserInfo", user);
     // parse the idToken from the user object
     let token = user?.idToken.split(".")[1];
     console.log("JSON.parse(safeatob(token)).wallets[0]", JSON.parse(safeatob(token)).wallets[0])
@@ -296,7 +297,7 @@ export const Web3AuthProvider = ({ children, web3AuthNetwork, chain }) => {
     // console.log("paymentKey", paymentKey);
     // const stakeKey = accountKey.derive(2).derive(0).to_raw_key();
     // console.log("stakeKey", stakeKey);
-    
+
     // // Convert key hashes into StakeCredential instances
     // const paymentCredential = StakeCredential.from_keyhash(paymentKey.to_public().hash());
     // const stakeCredential = StakeCredential.from_keyhash(stakeKey.to_public().hash());
@@ -332,8 +333,8 @@ export const Web3AuthProvider = ({ children, web3AuthNetwork, chain }) => {
     const mnemonicArray = mnemonic.split(" ");
 
     console.log("mnemonicArray", mnemonicArray);
-    
-    
+
+
     const wallet = new MeshWallet({
       networkId: 0, //NetworkInfo.testnet().network_id(),
       fetcher: blockchainProvider,
@@ -345,7 +346,7 @@ export const Web3AuthProvider = ({ children, web3AuthNetwork, chain }) => {
     });
 
     console.log("wallet", wallet);
-    
+
     // const wallet = new MeshWallet({
     //   networkId: 0, //NetworkInfo.testnet().network_id(),
     //   // fetcher: blockchainProvider,
@@ -368,18 +369,18 @@ export const Web3AuthProvider = ({ children, web3AuthNetwork, chain }) => {
     console.log("addr", addr);
 
     console.log("wallet.getUnusedAddresses", await wallet.getUnusedAddresses());
-    console.log("wallet.getBalance", await wallet.getBalance()); 
+    console.log("wallet.getBalance", await wallet.getBalance());
 
     let _balance;
     try {
       _balance = await wallet.getBalance();
-      if(_balance && _balance.length > 0) {
+      if (_balance && _balance.length > 0) {
         setCardanoWalletBalance(_balance[0].quantity);
       }
     } catch (_err) {
-      
+
     }
-    
+
     setCardanoWalletAddress(wallet.addresses.baseAddressBech32);
 
     const pkh = resolvePaymentKeyHash(wallet.addresses.baseAddressBech32);
@@ -391,7 +392,7 @@ export const Web3AuthProvider = ({ children, web3AuthNetwork, chain }) => {
 
   const getCardanoBalance = async () => {
     console.log("getCardanoBalance");
-    
+
     if (!cardanoWallet) {
       uiConsole("cardanoWallet not initialized yet");
       return;
@@ -400,14 +401,14 @@ export const Web3AuthProvider = ({ children, web3AuthNetwork, chain }) => {
     let _balance;
     try {
       _balance = await cardanoWallet.getBalance();
-      if(_balance && _balance.length > 0) {
+      if (_balance && _balance.length > 0) {
         setCardanoWalletBalance(_balance[0].quantity);
         console.log("Cardano Balance", _balance[0].quantity);
-        
+
         return _balance[0].quantity;
       }
     } catch (_err) {
-      
+
     }
   };
 
@@ -419,15 +420,15 @@ export const Web3AuthProvider = ({ children, web3AuthNetwork, chain }) => {
     ]);
 
     const scriptAddr = serializePlutusScript({
-        code: scriptCbor, version: "V3"
+      code: scriptCbor, version: "V3"
     }).address;
 
-    return {scriptCbor, scriptAddr};
+    return { scriptCbor, scriptAddr };
   }
 
   const applyParams = (tokenName, outputReference, validator) => {
     console.log("applyParams", tokenName, outputReference, validator);
-    
+
     // const outRef = {
     //   constructor: 0,
     //   fields: [
@@ -438,15 +439,15 @@ export const Web3AuthProvider = ({ children, web3AuthNetwork, chain }) => {
     //     BigInt(outputReference.outputIndex),
     //   ],
     // };
-  
+
     // const giftCard = applyParamsToScript(validator, [
     //   new TextEncoder().encode(tokenName),
     //   outRef,
     // ]);
-  
+
     // const policyId = resolvePlutusScriptHash(giftCard);
     // const lockAddress = resolvePlutusScriptAddress(giftCard);
-  
+
     // return {
     //   redeem: { type: "PlutusV2", script: toHex(giftCard) },
     //   giftCard: { type: "PlutusV2", script: toHex(giftCard) },
@@ -466,12 +467,12 @@ export const Web3AuthProvider = ({ children, web3AuthNetwork, chain }) => {
   //     fromText(tokenName),
   //     outRef,
   //   ]);
-   
+
   //   const policyId = validatorToScriptHash({
   //     type: "PlutusV2",
   //     script: giftCard,
   //   });
-   
+
   //   const lockAddress = validatorToAddress("Preprod", {
   //     type: "PlutusV2",
   //     script: giftCard,
@@ -488,17 +489,17 @@ export const Web3AuthProvider = ({ children, web3AuthNetwork, chain }) => {
   // reusable function to get a transaction builder
   const getTxBuilder = async () => {
     return new MeshTxBuilder({
-        fetcher: blockchainProvider,
-        submitter: blockchainProvider,
-        verbose: true
+      fetcher: blockchainProvider,
+      submitter: blockchainProvider,
+      verbose: true
     });
   }
 
   // reusable function to get a UTxO by transaction hash
   const getUtxoByTxHash = async (txHash) => {
     const utxos = await blockchainProvider.fetchUTxOs(txHash);
-    if(utxos.length === 0) {
-        throw new Error("UTxO not found");
+    if (utxos.length === 0) {
+      throw new Error("UTxO not found");
     }
     return utxos[0];
   }
@@ -516,18 +517,18 @@ export const Web3AuthProvider = ({ children, web3AuthNetwork, chain }) => {
     const giftCard = blueprint.validators.find(
       (v) => v.title === "oneshot.gift_card.spend"
     );
-   
+
     if (!giftCard) {
       throw new Error("Gift Card validator not found");
     }
-   
+
     return {
       giftCard: giftCard.compiledCode,
     };
   }
 
   async function fetchTxStatus(txHash) {
-    
+
     const response = await fetch(`https://cardano-preview.blockfrost.io/api/v0/txs/${txHash}`, {
       headers: { project_id: BLOCKFROST_PROJECT_ID },
     });
@@ -536,13 +537,13 @@ export const Web3AuthProvider = ({ children, web3AuthNetwork, chain }) => {
 
     return response;
   }
-  
+
   async function waitForTx(txHash, maxRetries = 30, delay = 5000) {
     for (let i = 0; i < maxRetries; i++) {
       const response = await fetchTxStatus(txHash);
 
       let status;
-        
+
       if (response.status === 200) {
         status = "confirmed"; // Transaction found = confirmed
       } else if (response.status === 404) {
@@ -551,15 +552,15 @@ export const Web3AuthProvider = ({ children, web3AuthNetwork, chain }) => {
         status = "failed"; // Handle other errors
       }
       console.log(`Transaction Status: ${status}`);
-  
+
       if (status === "confirmed") {
         console.log("Transaction confirmed!");
         return response;
       }
-  
+
       await new Promise((resolve) => setTimeout(resolve, delay)); // Wait before retrying
     }
-  
+
     throw new Error("Transaction confirmation timeout exceeded.");
   }
 
@@ -632,6 +633,6 @@ export const Web3AuthProvider = ({ children, web3AuthNetwork, chain }) => {
   };
 
   return <Web3AuthContext.Provider value={contextProvider}>
-            {children}
-        </Web3AuthContext.Provider>;
+    {children}
+  </Web3AuthContext.Provider>;
 };
