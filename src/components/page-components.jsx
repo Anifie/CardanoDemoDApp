@@ -474,34 +474,25 @@ export const OnboardingSection = () => {
         <BackgroundSection />
 
         <div className="relative flex flex-col items-center px-4 pt-16">
-          <h1 className="text-3xl md:text-4xl font-bold text-white mb-6 text-center">
-            Cardano NFT Giveaway
+          <h1 className="text-2xl md:text-3xl lg:text-4xl font-bold text-white mb-6 text-center">
+            Cardano NFT Special Offer
           </h1>
-          <div className="w-full max-w-4xl mb-4">
-            <div className="relative rounded-xl overflow-hidden shadow-2xl">
-              {/* <img
-                src={"/images/kol/hero.png"}
-                alt={` cover`}
-                className="w-full h-[400px] object-contain"
-              /> */}
-            </div>
-          </div>
-          <p className="text-xl font-bold text-center text-white max-w-2xl">
+          <p className="text-lg md:text-xl font-bold text-center text-white max-w-2xl px-4 mb-4">
             Join Our Community now to get exclusive and unique NFTs on Cardano Blockchain!
           </p>
 
 
 
-          <div className="flex items-center gap-2 mb-4 text-white">
+          <div className="flex flex-row items-start md:items-center gap-2 mb-4 text-white px-4 max-w-lg">
             <input
               type="checkbox"
               id="terms"
-              className="w-6 h-6 rounded border-gray-300"
+              className="w-5 h-5 md:w-6 md:h-6 rounded border-gray-300 shrink-0 mt-0.5 md:mt-0"
               checked={isAcceptTOS}
               onChange={(e) => setIsAcceptTOS(e.target.checked)}
             />
 
-            <label htmlFor="terms" className="tex">
+            <label htmlFor="terms" className="text-xs md:text-sm leading-relaxed">
               By clicking the button below, you agree to our <Link href="/terms" target="_blank" className="text-blue-500">Terms of Service</Link> and <Link href="/privacy" target="_blank" className="text-blue-500">Privacy Policy</Link>
 
             </label>
@@ -510,7 +501,7 @@ export const OnboardingSection = () => {
           <button
             onClick={onClick}
             disabled={!isAcceptTOS}
-            className={`text-white text-xl font-bold px-12 py-4 rounded-lg transition-colors ${isAcceptTOS
+            className={`text-white text-lg md:text-xl font-bold px-8 md:px-12 py-3 md:py-4 rounded-lg transition-colors w-full max-w-xs ${isAcceptTOS
               ? "bg-blue-600 hover:bg-blue-700"
               : "bg-blue-300 cursor-not-allowed"
               }`}
@@ -526,20 +517,21 @@ export const OnboardingSection = () => {
       </div >
       <AlertDialog open={step == STEPS.CREATING_WALLET}>
         <AlertDialogContent
-          className={`p-2 max-w-[350px] lg:max-w-[800px] rounded`}
+          className={`p-4 md:p-6 max-w-[90vw] md:max-w-[350px] lg:max-w-[800px] rounded mx-2`}
         >
           <AlertDialogHeader>
             <StepShow step={1} />
 
-            <AlertDialogTitle className="text-center mb-6">
-              <div className="relative w-24 h-24 mx-auto mb-4">
-                <div className="w-20 h-20 bg-[#E3F2FD] rounded-full flex items-center justify-center mx-auto">
+            <AlertDialogTitle className="text-center mb-4 md:mb-6">
+              <div className="relative w-20 h-20 md:w-24 md:h-24 mx-auto mb-4">
+                <div className="w-16 h-16 md:w-20 md:h-20 bg-[#E3F2FD] rounded-full flex items-center justify-center mx-auto">
                   <svg
-                    width="41"
-                    height="40"
+                    width="33"
+                    height="32"
                     viewBox="0 0 41 40"
                     fill="none"
                     xmlns="http://www.w3.org/2000/svg"
+                    className="md:w-[41px] md:h-[40px]"
                   >
                     <g clipPath="url(#clip0_2737_8464)">
                       <path
@@ -572,16 +564,16 @@ export const OnboardingSection = () => {
                   </svg>
                 </div>
                 {/* Animated loading circle */}
-                <div className="absolute top-0 left-[10px] w-full h-full">
-                  <div className="w-20 h-20 border-2 border-[#1976D2] rounded-full border-t-transparent animate-spin"></div>
+                <div className="absolute top-0 left-[8px] md:left-[10px] w-full h-full">
+                  <div className="w-16 h-16 md:w-20 md:h-20 border-2 border-[#1976D2] rounded-full border-t-transparent animate-spin"></div>
                 </div>
               </div>
-              <h2 className="text-xl font-bold text-black">
+              <h2 className="text-lg md:text-xl font-bold text-black">
                 Creating wallet
                 <br />
               </h2>
             </AlertDialogTitle>
-            <AlertDialogDescription className="text-center text-gray-600 pb-8 text-[13px]">
+            <AlertDialogDescription className="text-center text-gray-600 pb-6 md:pb-8 text-xs md:text-[13px]">
               Creating Digital Wallet for you...
 
             </AlertDialogDescription>
@@ -589,19 +581,20 @@ export const OnboardingSection = () => {
         </AlertDialogContent>
       </AlertDialog>
       <AlertDialog open={step == STEPS.REQUESTING_NFT}>
-        <AlertDialogContent className={`p-2 max-w-[350px] lg:max-w-[800px]`}>
+        <AlertDialogContent className={`p-4 md:p-6 max-w-[90vw] md:max-w-[350px] lg:max-w-[800px] mx-2`}>
           <AlertDialogHeader>
             <StepShow step={2} />
 
-            <AlertDialogTitle className="text-center mb-6">
-              <div className="relative w-24 h-24 mx-auto mb-4">
-                <div className="w-20 h-20 bg-[#E3F2FD] rounded-full flex items-center justify-center mx-auto">
+            <AlertDialogTitle className="text-center mb-4 md:mb-6">
+              <div className="relative w-20 h-20 md:w-24 md:h-24 mx-auto mb-4">
+                <div className="w-16 h-16 md:w-20 md:h-20 bg-[#E3F2FD] rounded-full flex items-center justify-center mx-auto">
                   <svg
-                    width="41"
-                    height="41"
+                    width="33"
+                    height="33"
                     viewBox="0 0 41 41"
                     fill="none"
                     xmlns="http://www.w3.org/2000/svg"
+                    className="md:w-[41px] md:h-[41px]"
                   >
                     <path
                       d="M26.3335 15.5C23.3418 15.5 21.8751 14.0333 21.0918 13.2417C20.7668 12.9167 20.2418 12.9167 19.9168 13.2417C19.1251 14.0333 17.6585 15.5 14.6751 15.5C14.2168 15.5 13.8418 15.875 13.8418 16.3333C13.8418 23.175 14.7918 26.075 20.1335 28.7417C20.2501 28.8 20.3751 28.8333 20.5085 28.8333C20.6418 28.8333 20.7668 28.8 20.8835 28.7417C26.2251 26.0667 27.1751 23.1667 27.1751 16.3333C27.1751 15.875 26.8001 15.5 26.3418 15.5H26.3335ZM22.9085 19.2083L21.2418 22.5417C21.1251 22.7833 20.8918 22.95 20.6335 22.9917C20.5918 22.9917 20.5418 23 20.5001 23C20.2835 23 20.0668 22.9167 19.9085 22.7583L18.2418 21.0917C17.9168 20.7667 17.9168 20.2417 18.2418 19.9167C18.5668 19.5917 19.0918 19.5917 19.4168 19.9167L20.2668 20.7667L21.4168 18.4667C21.6251 18.0583 22.1251 17.8917 22.5335 18.0917C22.9418 18.3 23.1085 18.8 22.9085 19.2083Z"
@@ -637,46 +630,46 @@ export const OnboardingSection = () => {
                     />
                   </svg>
                 </div>
-                <div className="absolute top-0 left-[10px] w-full h-full">
-                  <div className="w-20 h-20 border-2 border-[#1976D2] rounded-full border-t-transparent animate-spin"></div>
+                <div className="absolute top-0 left-[8px] md:left-[10px] w-full h-full">
+                  <div className="w-16 h-16 md:w-20 md:h-20 border-2 border-[#1976D2] rounded-full border-t-transparent animate-spin"></div>
                 </div>
               </div>
-              <h2 className="text-xl font-bold text-black">
+              <h2 className="text-lg md:text-xl font-bold text-black">
                 Requesting NFT
               </h2>
             </AlertDialogTitle>
-            <AlertDialogDescription className="text-center text-gray-600 pb-8">
+            <AlertDialogDescription className="text-center text-gray-600 pb-6 md:pb-8 text-sm md:text-base">
               Requesting server to start minting NFT...
             </AlertDialogDescription>
           </AlertDialogHeader>
         </AlertDialogContent>
       </AlertDialog>
       <AlertDialog open={step == STEPS.NFT_REQUESTED}>
-        <AlertDialogContent className={`p-2 max-w-[350px] lg:max-w-[800px]`}>
+        <AlertDialogContent className={`p-4 md:p-6 max-w-[90vw] md:max-w-[350px] lg:max-w-[800px] mx-2`}>
           <AlertDialogHeader>
             <StepShow step={3} />
 
-            <AlertDialogTitle className="text-center mb-6">
-              <h2 className="text-xl font-bold text-black">
+            <AlertDialogTitle className="text-center mb-4 md:mb-6">
+              <h2 className="text-lg md:text-xl font-bold text-black">
                 NFT requested
               </h2>
             </AlertDialogTitle>
-            <AlertDialogDescription className="text-center text-gray-600 pb-8">
+            <AlertDialogDescription className="text-center text-gray-600 pb-6 md:pb-8 text-sm md:text-base">
               NFT minting has been requested.
             </AlertDialogDescription>
           </AlertDialogHeader>
         </AlertDialogContent>
       </AlertDialog>
       <AlertDialog open={step == STEPS.NFT_NOT_AVAILABLE}>
-        <AlertDialogContent className={`p-2 max-w-[350px] lg:max-w-[800px]`}>
+        <AlertDialogContent className={`p-4 md:p-6 max-w-[90vw] md:max-w-[350px] lg:max-w-[800px] mx-2`}>
           <AlertDialogHeader>
-            <AlertDialogTitle className="text-center mb-6">
-              <h2 className="text-xl font-bold text-black">
+            <AlertDialogTitle className="text-center mb-4 md:mb-6">
+              <h2 className="text-lg md:text-xl font-bold text-black">
                 NFT not available
               </h2>
             </AlertDialogTitle>
           </AlertDialogHeader>
-          <AlertDialogDescription className="text-center text-gray-600 pb-8">
+          <AlertDialogDescription className="text-center text-gray-600 pb-6 md:pb-8 text-sm md:text-base">
             NFT not available or error occurred. Please try again later.
           </AlertDialogDescription>
           <AlertDialogFooter>
@@ -693,20 +686,20 @@ export const OnboardingSection = () => {
         </AlertDialogContent>
       </AlertDialog>
       <AlertDialog open={step == STEPS.NFT_CLAIMED}>
-        <AlertDialogContent className={`p-2 max-w-[350px] lg:max-w-[800px]`}>
+        <AlertDialogContent className={`p-4 md:p-6 max-w-[90vw] md:max-w-[350px] lg:max-w-[800px] mx-2`}>
           <AlertDialogHeader>
             <StepShow step={3} />
-            <AlertDialogTitle className="text-center mb-6">
-              <h2 className="text-xl font-bold text-black">
+            <AlertDialogTitle className="text-center mb-4 md:mb-6">
+              <h2 className="text-lg md:text-xl font-bold text-black">
                 NFT claimed
               </h2>
             </AlertDialogTitle>
-            <AlertDialogDescription className="text-center text-gray-600 pb-8">
+            <AlertDialogDescription className="text-center text-gray-600 pb-6 md:pb-8">
               <Link
                 href={
                   "https://discord.gg/5H48ECt6DG"
                 }
-                className="inline-block bg-blue-600 text-white hover:bg-blue-700 px-4 py-2 rounded-md mb-4"
+                className="inline-block bg-blue-600 text-white hover:bg-blue-700 px-4 py-2 rounded-md mb-4 text-sm md:text-base"
               >
                 Community
               </Link>
@@ -716,12 +709,12 @@ export const OnboardingSection = () => {
       </AlertDialog>
       <AlertDialog open={step == STEPS.NFT_PROCESSING}>
         <AlertDialogContent
-          className={`p-2 max-w-[350px] rounded-lg lg:max-w-[800px]`}
+          className={`p-4 md:p-6 max-w-[90vw] md:max-w-[350px] rounded-lg lg:max-w-[800px] mx-2`}
         >
           <AlertDialogHeader>
             <StepShow step={3} />
-            <AlertDialogTitle className="text-center mb-6">
-              <h2 className="text-xl font-bold text-black">
+            <AlertDialogTitle className="text-center mb-4 md:mb-6">
+              <h2 className="text-lg md:text-xl font-bold text-black">
                 Congratulations! Your NFT is on the way!
               </h2>
             </AlertDialogTitle>
@@ -729,16 +722,16 @@ export const OnboardingSection = () => {
               <div className="relative pl-3 mb-4">
                 <div className="relative">
                   <div className="relative">
-                    <p className="text-center mb-4 text-lg">
+                    <p className="text-center mb-4 text-sm md:text-lg">
                       Membership NFT will take some time to be minted. Meanwhile, you can join our community to get more information about the project and receive exclusive offers.
                     </p>
                   </div>
                 </div>
                 <div className="flex items-center justify-center">
-                  <img src="/discord-logo.png"></img>
+                  <img src="/discord-logo.png" className="max-w-[150px] md:max-w-none"></img>
                 </div>
               </div>
-              <div className="flex flex-col gap-4 text-xl">
+              <div className="flex flex-col gap-4 text-lg md:text-xl">
                 <Link
                   href={DISCORD_URL}
                   target="_blank"

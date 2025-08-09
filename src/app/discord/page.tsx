@@ -7,6 +7,7 @@ import { useRouter } from "next/navigation";
 import { toast } from "react-toastify";
 import { useWeb3Auth } from "@app/common/service/useWeb3Auth";
 import { useMembership } from "@app/common/service/useMembership";
+import Link from "next/link";
 
 export default function DiscordGrant() {
   const router = useRouter();
@@ -69,7 +70,7 @@ export default function DiscordGrant() {
       {isLoggedIn && discordId ? (
         <div className="w-full h-full relative flex justify-center items-start pt-48">
           <div className="w-full max-w-[800px] px-8 py-8 border border-white rounded bg-[#0a080857]">
-            <p className="text-center mb-4 font-bold text-xl text-white">
+            <p className="text-center mb-4 font-bold text-2xl text-white">
               {isLoading != "error" && isLoading != "success" && "Please wait a moment..."}
               {isLoading == "error" && "An error occurred. Please try again."}
               {isLoading == "success" && "Successfully linked."}
@@ -92,9 +93,22 @@ export default function DiscordGrant() {
             )}
             {isLoading == "success" && (
               <div className="w-full text-center text-white text-lg">
-                <h2 className="mb-2">
-                  Your Discord account has been linked with your wallet. You can now close this page.
-                </h2>
+                <p className="mb-2">
+                  Your Discord account has been linked with your Cardano wallet.
+
+                  <br />
+                  As a reward, you will receive a special Virtual Car NFT minted to your wallet.
+                  <br />
+                  Please check your wallet to see if you have received the NFT.
+                  <br />
+                  <br />
+                  <button
+                    onClick={() => window.location.href = "/my-nft"}
+                    className="inline-flex items-center px-6 py-3 bg-blue-600 hover:bg-blue-700 text-white rounded-lg transition-all duration-300 shadow-lg hover:shadow-xl"
+                  >
+                    My Wallet
+                  </button>
+                </p>
               </div>
             )}
           </div>
