@@ -337,7 +337,8 @@ export const Web3AuthProvider = ({ children, web3AuthNetwork, chain }) => {
 
 
     const wallet = new MeshWallet({
-      networkId: 0, //NetworkInfo.testnet().network_id(),
+      // networkId: 0, //NetworkInfo.testnet().network_id(),
+      networkId: 1, //NetworkInfo.testnet().network_id(),
       fetcher: blockchainProvider,
       submitter: blockchainProvider,
       key: {
@@ -530,7 +531,8 @@ export const Web3AuthProvider = ({ children, web3AuthNetwork, chain }) => {
 
   async function fetchTxStatus(txHash) {
 
-    const response = await fetch(`https://cardano-preview.blockfrost.io/api/v0/txs/${txHash}`, {
+    // const response = await fetch(`https://cardano-preview.blockfrost.io/api/v0/txs/${txHash}`, {
+    const response = await fetch(`https://cardano-mainnet.blockfrost.io/api/v0/txs/${txHash}`, {
       headers: { project_id: BLOCKFROST_PROJECT_ID },
     });
 
