@@ -470,7 +470,7 @@ export const OnboardingSection = () => {
   return (
     <>
       {/* Hero Section */}
-      <div className="relative min-h-[700px] pb-4 bg-gradient-to-br from-[#0a0f2c] via-[#1e2746] to-[#0a2e3b]">
+      <div className="relative min-h-screen pb-4 bg-gradient-to-br from-[#0a0f2c] via-[#1e2746] to-[#0a2e3b]">
         <BackgroundSection />
 
         <div className="relative flex flex-col items-center px-4 pt-16">
