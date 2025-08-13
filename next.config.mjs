@@ -12,6 +12,7 @@ const nextConfig = {
   trailingSlash: true,
   env: {
     TITLE: process.env.TITLE,
+    MODE: process.env.NEXT_PUBLIC_ENV_MODE,
     BACKEND_API_URL: process.env.BACKEND_API_URL,
     BACKEND_WS_API_URL: process.env.BACKEND_WS_API_URL,
     WEB3AUTH_CLIENT_ID: process.env.WEB3AUTH_CLIENT_ID,
